@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>client-side-pagination</title>
+    <title>resetSearch</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/bootstrap-table/src/bootstrap-table.css">
@@ -13,13 +13,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>Client Side Pagination</h1>
-        <p>Use <code>pagination</code>, <code>sidePagination</code>, <code>pageNumber</code>, <code>pageSize</code>, <code>pageList</code> options to set the pagination options.</p>
+        <h1>resetSearch</h1>
+        <p></p>
+        <div id="toolbar">
+            <button id="button" class="btn btn-default">resetSearch</button>
+        </div>
         <table id="table"
                data-toggle="table"
+               data-toolbar="#toolbar"
                data-height="460"
-               data-pagination="true"
                data-search="true"
+               data-search-text="11"
                data-url="../json/data1.json">
             <thead>
             <tr>
@@ -31,9 +35,13 @@
         </table>
     </div>
 <script>
-    var $table = $('#table');
+    var $table = $('#table'),
+        $button = $('#button');
 
     $(function () {
+        $button.click(function () {
+            $table.bootstrapTable('resetSearch');
+        });
     });
 </script>
 </body>

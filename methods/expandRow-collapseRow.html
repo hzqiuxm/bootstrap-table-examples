@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>client-side-pagination</title>
+    <title>expandRow-collapseRow</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/bootstrap-table/src/bootstrap-table.css">
@@ -13,13 +13,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>Client Side Pagination</h1>
-        <p>Use <code>pagination</code>, <code>sidePagination</code>, <code>pageNumber</code>, <code>pageSize</code>, <code>pageList</code> options to set the pagination options.</p>
+        <h1>expandRow-collapseRow</h1>
+        <p></p>
+        <div id="toolbar">
+            <button id="button" class="btn btn-default">expandRow</button>
+            <button id="button2" class="btn btn-default">collapseRow</button>
+        </div>
         <table id="table"
                data-toggle="table"
+               data-toolbar="#toolbar"
                data-height="460"
-               data-pagination="true"
-               data-search="true"
+               data-detail-view="true"
+               data-detail-formatter="detailFormatter"
                data-url="../json/data1.json">
             <thead>
             <tr>
@@ -31,10 +36,26 @@
         </table>
     </div>
 <script>
-    var $table = $('#table');
+    var $table = $('#table'),
+        $button = $('#button'),
+        $button2 = $('#button2');
 
     $(function () {
+        $button.click(function () {
+            $table.bootstrapTable('expandRow', 1);
+        });
+        $button2.click(function () {
+            $table.bootstrapTable('collapseRow', 1);
+        });
     });
+
+    function detailFormatter(index, row) {
+        var html = [];
+        $.each(row, function (key, value) {
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+    }
 </script>
 </body>
 </html>
